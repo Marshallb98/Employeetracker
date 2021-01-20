@@ -142,10 +142,43 @@ function employeeAddDep() {
     .then(function(answer) {
         console.log(answer)
         connection.query("INSERT INTO department SET ?", {
-            name: answer.department,
+            name: answer.department
         }, function(err) {
             if (err) throw (err)
             console.log("Department Added!")
+            start();
+        })
+    })
+}
+
+function employeeAddRole() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your new role name?',
+            name: "role"
+        },
+        {
+            type: 'input',
+            message: 'What is the roles salary?',
+            name: "salary"
+        },
+        {
+            type: 'input',
+            message: 'What is the department ID of this role?',
+            name: "department_id"
+        }
+        
+    ])
+    .then(function(answer) {
+        console.log(answer)
+        connection.query("INSERT INTO role SET ?", {
+            title: answer.role,
+            salary: answer.salary,
+            department_id: answer.department_id
+        }, function(err) {
+            if (err) throw (err)
+            console.log("Role Added!")
             start();
         })
     })
