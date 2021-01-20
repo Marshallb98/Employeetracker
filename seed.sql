@@ -16,10 +16,10 @@ INSERT INTO role (title, salary, department_id)
 VALUES ("Head Wait", 10, 1);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Waiter", 2.13, 1);
+VALUES ("Waiter", 2, 1);
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Server Training", 7.25, 1);
+VALUES ("Server Training", 7, 1);
 
 INSERT INTO role (title, salary, department_id)
 VALUES ("Barback", 20, 2);

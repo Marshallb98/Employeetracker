@@ -13,8 +13,18 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err) {
     if (err) throw err;
+    console.log("connected!")
     start()
 })
+
+function employeeData() {
+    connection.query("SELECT employee.first_name, employee.last_name, role.title, department.name, role.salary FROM employee INNER JOIN role ON (employee.role_id = role.id) LEFT JOIN department ON (role.department_id = department.id)", function (err, res) {
+        if (err) throw err;
+        console.log("employee data!")
+        console.table(res);
+        start();
+    })
+}
 
 function start() {
     inquirer
@@ -33,8 +43,8 @@ function start() {
             ]
 
         }])
-        .then(function(answer) {
-            switch (answer.action) {
+        .then(function (answer) {
+            switch (answer.start) {
                 case "View All Employees":
                     employeeData();
                     break;
