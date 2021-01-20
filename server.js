@@ -27,9 +27,9 @@ function start() {
                 "View all Departments",
                 "View all Roles",
                 "Add Employee",
-                "Remove Employee",
+                "Add Department",
+                "Add Role",
                 "Update Employee Role",
-                "Update Employee Department",
                 "Done"
             ]
 
@@ -52,17 +52,18 @@ function start() {
                     employeeAdd();
                     break;
 
-                case "Remove Employee":
-                    employeeRemove();
+                case "Add Department":
+                    employeeAddDep();
+                    break;
+
+                case "Add Role":
+                    employeeAddRole();
                     break;
 
                 case "Update Employee Role":
                     employeeUpdateRole();
                     break;
 
-                case "Update Employee Department":
-                    employeeUpdateDep();
-                    break;
 
                 case "Done":
                     connection.end();
@@ -97,3 +98,36 @@ function employeeRole() {
         start();
     })
 }
+
+function employeeAdd() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your employees first name?',
+            name: "first_name"
+        },
+        {
+            type: 'input',
+            message: 'What is your employees last name?',
+            name: "last_name"
+        },
+        {
+            type: 'input',
+            message: 'What role does your employee belong to? Enter role ID',
+            name: "role"
+        }
+    ])
+    .then(function(answer) {
+        console.log(answer)
+        connection.query("INSERT INTO employee SET ?", {
+            first_name: answer.first_name,
+            last_name: answer.last_name,
+            role_id: answer.role,
+        }, function(err) {
+            if (err) throw (err)
+            console.log("Employee Added!")
+            start();
+        })
+    })
+}
+
