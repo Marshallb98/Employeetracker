@@ -131,3 +131,22 @@ function employeeAdd() {
     })
 }
 
+function employeeAddDep() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is your new department name?',
+            name: "department"
+        }
+    ])
+    .then(function(answer) {
+        console.log(answer)
+        connection.query("INSERT INTO department SET ?", {
+            name: answer.department,
+        }, function(err) {
+            if (err) throw (err)
+            console.log("Department Added!")
+            start();
+        })
+    })
+}
