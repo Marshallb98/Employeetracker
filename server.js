@@ -183,3 +183,33 @@ function employeeAddRole() {
         })
     })
 }
+
+function employeeUpdateRole() {
+        inquirer
+            .prompt([
+                {
+                    name: "id",
+                    type: "input",
+                    message: "Please enter ID of employee whose role you would like to change",
+                },
+                {
+                    name: 'roleID',
+                    type: 'input',
+                    message: "Please enter the ID of the Role you would like to assign to employee",
+                },
+            ])
+            .then(function (answer) {
+                connection.query(
+                    "UPDATE employee SET role_id = ? WHERE id = ? ",
+                    [answer.roleID, answer.id],
+
+                    function (err) {
+                        if (err) throw err;
+
+                        console.log("Updated Employees Role!");
+                        start();
+                    }
+                );
+            })
+    }
+
