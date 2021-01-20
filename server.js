@@ -1,7 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table")
-const cfonts = require("cfonts")
 
 var connection = mysql.createConnection({
     host: "localhost",
